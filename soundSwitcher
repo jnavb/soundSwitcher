@@ -1,0 +1,22 @@
+tell application "System Preferences"
+	set current pane to pane "com.apple.preference.sound"
+end tell
+
+tell application "System Events"
+	tell application process "System Preferences"
+		repeat until exists tab group 1 of window "Sound"
+		end repeat
+		tell tab group 1 of window "Sound"
+			click radio button "Output"
+			if (selected of row 2 of table 1 of scroll area 1) then
+				set selected of row 1 of table 1 of scroll area 1 to true
+				set deviceselected to "Headphones"
+			else
+				set selected of row 2 of table 1 of scroll area 1 to true
+				set deviceselected to "EDIFIER R1700BT"
+			end if
+		end tell
+	end tell
+end tell
+
+tell application "System Preferences" to quit
